@@ -21,7 +21,7 @@ const CreateEvent = () => {
   useEffect(() => {
     const fetchClubs = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/clubs');
+        const response = await axios.get(' https://campus-hub-backend-wz09.onrender.com/api/clubs');
         const clubsArray = Array.isArray(response.data) 
           ? response.data 
           : response.data.clubs || response.data.data || [];
@@ -70,7 +70,7 @@ const CreateEvent = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:3000/api/events/create', dataToSend, {
+      const response = await axios.post(' https://campus-hub-backend-wz09.onrender.com/api/events/create', dataToSend, {
         headers: { 
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}` 

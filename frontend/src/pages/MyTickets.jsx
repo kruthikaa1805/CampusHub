@@ -17,7 +17,7 @@ const MyTickets = () => {
           return;
         }
 
-        const response = await axios.get('http://localhost:3000/api/registrations/my-tickets', {
+        const response = await axios.get(' https://campus-hub-backend-wz09.onrender.com/api/registrations/my-tickets', {
           headers: { Authorization: `Bearer ${token}` }
         });
         
@@ -75,7 +75,7 @@ const MyTickets = () => {
                   {/* Image Section */}
                   <div className="h-48 overflow-hidden bg-gray-100 relative shrink-0">
                     <img 
-                      src={`http://localhost:3000${event.image}`} 
+                      src={` https://campus-hub-backend-wz09.onrender.com${event.image}`} 
                       alt={event.title} 
                       className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${isAttended ? 'grayscale opacity-70' : ''}`}
                       onError={(e) => { e.target.src = 'https://via.placeholder.com/400x200?text=Event+Flyer'; }}

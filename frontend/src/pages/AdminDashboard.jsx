@@ -11,7 +11,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/events');
+        const response = await axios.get(' https://campus-hub-backend-wz09.onrender.com/api/events');
         setEvents(response.data);
         if (response.data.length > 0) {
           setSelectedEvent(response.data[0]._id);
@@ -30,7 +30,7 @@ const AdminDashboard = () => {
       setLoading(true);
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:3000/api/registrations/event/${selectedEvent}`, {
+        const response = await axios.get(` https://campus-hub-backend-wz09.onrender.com/api/registrations/event/${selectedEvent}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setAttendees(response.data);
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
   const handleCheckIn = async (ticketId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put('http://localhost:3000/api/registrations/checkin', 
+      await axios.put(' https://campus-hub-backend-wz09.onrender.com/api/registrations/checkin', 
         { ticketId }, 
         { headers: { Authorization: `Bearer ${token}` } }
       );

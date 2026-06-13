@@ -12,7 +12,7 @@ const Clubs = () => {
   useEffect(() => {
     const fetchClubs = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/clubs');
+        const response = await axios.get(' https://campus-hub-backend-wz09.onrender.com/api/clubs');
         setClubs(response.data.clubs);
       } catch (err) {
         console.error("Error fetching clubs:", err);

@@ -41,7 +41,7 @@ const CreateClub = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:3000/api/clubs/create', dataToSend, {
+      const response = await axios.post(' https://campus-hub-backend-wz09.onrender.com/api/clubs/create', dataToSend, {
         headers: { 
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}` 

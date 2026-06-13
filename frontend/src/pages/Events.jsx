@@ -10,7 +10,7 @@ const Events = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/events');
+      const response = await axios.get(' https://campus-hub-backend-wz09.onrender.com/api/events');
       setEvents(response.data);
     } catch (err) {
       console.error("Error fetching events:", err);
@@ -34,7 +34,7 @@ const Events = () => {
       }
 
       const response = await axios.post(
-        'http://localhost:3000/api/registrations/join',
+        ' https://campus-hub-backend-wz09.onrender.com/api/registrations/join',
         { eventId: eventId },
         { headers: { 'Authorization': `Bearer ${token}` } }
       );
@@ -119,7 +119,7 @@ const Events = () => {
                   {/* Image Header - Hover scaling removed */}
                   <div className="h-48 overflow-hidden bg-gray-100 relative shrink-0">
                     <img 
-                      src={`http://localhost:3000${event.image}`} 
+                      src={` https://campus-hub-backend-wz09.onrender.com${event.image}`} 
                       alt={event.title} 
                       className={`w-full h-full object-cover ${isSoldOut ? 'grayscale opacity-80' : ''}`}
                       onError={(e) => { e.target.src = 'https://via.placeholder.com/400x200?text=Event+Flyer'; }}
@@ -149,7 +149,7 @@ const Events = () => {
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-5 h-5 rounded-full bg-blue-100 overflow-hidden shrink-0">
                           <img 
-                             src={event.clubId.image ? `http://localhost:3000${event.clubId.image}` : `https://ui-avatars.com/api/?name=${event.clubId.name}&background=random`} 
+                             src={event.clubId.image ? ` https://campus-hub-backend-wz09.onrender.com${event.clubId.image}` : `https://ui-avatars.com/api/?name=${event.clubId.name}&background=random`} 
                              alt="club logo" 
                              className="w-full h-full object-cover"
                              onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${event.clubId.name}&background=random`; }}

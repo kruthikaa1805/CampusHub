@@ -7,7 +7,7 @@ const createClub = async (req, res) => {
     let imageUrl = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"; // Default fallback
     
     if (req.file) {
-      imageUrl = `http://localhost:3000/uploads/${req.file.filename}`; 
+      imageUrl = ` https://campus-hub-backend-wz09.onrender.com/uploads/${req.file.filename}`; 
     }
     const newClub = await Club.create({
       name,
