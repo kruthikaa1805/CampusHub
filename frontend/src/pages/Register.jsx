@@ -17,7 +17,7 @@ const Register = () => {
     e.preventDefault();
     setError('');
     
-    const cleanEmail = formData.email.trim
+    const cleanEmail = formData.email.trim()
     console.log("Sanitized Email Check ->", `"${cleanEmail}"`);
 
     if (!cleanEmail.endsWith('nitw.ac.in')) {
@@ -28,7 +28,7 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(' https://campus-hub-backend-wz09.onrender.com/api/auth/register', {
+      const response = await axios.post('https://campus-hub-backend-wz09.onrender.com/api/auth/register', {
         name: formData.name.trim(),
         email: cleanEmail, 
         password: formData.password
