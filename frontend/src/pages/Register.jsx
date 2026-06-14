@@ -19,8 +19,8 @@ const Register = () => {
     
     const cleanEmail = formData.email.trim()
     console.log("Sanitized Email Check ->", `"${cleanEmail}"`);
-
-    if (!cleanEmail.endsWith('nitw.ac.in')) {
+    const isValidEmail = cleanEmail.endsWith('@nitw.ac.in') || cleanEmail.endsWith('@student.nitw.ac.in');
+    if (!isValidEmail) {
       setError('Registration is restricted to valid NITW email addresses.');
       return; 
     }
