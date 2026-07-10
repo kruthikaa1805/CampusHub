@@ -4,17 +4,20 @@ const createClub = async (req, res) => {
   try {
     const { name, description, category, presidentName } = req.body;
 
-    let imageUrl = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"; // Default fallback
+    // Default fallback image if the user doesn't upload a custom logo
+    let imageUrl = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"; 
     
-    if (req.file) {
-      imageUrl = ` https://campus-hub-backend-wz09.onrender.com/uploads/${req.file.filename}`; 
+    // Cloudinary automatically attaches the secure, permanent cloud URL to req.file.path
+    if (req.file && req.file.path) {
+      imageUrl = req.file.path; 
     }
+
     const newClub = await Club.create({
       name,
       description,
       category,
       presidentName,
-      image: imageUrl,
+      image: imageUrl, // Save the cloud URL directly to MongoDB
       adminId: req.user._id 
     });
 
@@ -26,11 +29,10 @@ const createClub = async (req, res) => {
   }
 };
 
-
 const getClubs = async (req, res) => {
     try {
-      
         const clubs = await Club.find().populate('adminId', 'name email');
+        
         res.status(200).json({
             message: "Clubs fetched successfully",
             count: clubs.length,

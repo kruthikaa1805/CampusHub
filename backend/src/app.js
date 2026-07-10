@@ -9,7 +9,7 @@ app.use(cors(
     }
 ))
 app.use(express.json());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 const authRoutes=require('./routes/auth.routes')
 const clubRoutes=require('./routes/club.routes')
