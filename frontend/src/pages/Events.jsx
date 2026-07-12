@@ -119,11 +119,10 @@ const Events = () => {
                   {/* Image Header - Hover scaling removed */}
                   <div className="h-48 overflow-hidden bg-gray-100 relative shrink-0">
                     <img 
-                      src={` https://campus-hub-backend-wz09.onrender.com${event.image}`} 
-                      alt={event.title} 
-                      className={`w-full h-full object-cover ${isSoldOut ? 'grayscale opacity-80' : ''}`}
-                      onError={(e) => { e.target.src = 'https://via.placeholder.com/400x200?text=Event+Flyer'; }}
-                    />
+  src={event.image || "https://images.unsplash.com/photo-1540317580384-e5d43867caa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"} 
+  alt={event.title || "Campus Event"} 
+  className={`w-full h-48 object-cover rounded-t-lg ${isSoldOut ? 'grayscale opacity-80' : ''}`}
+/>
                     
                     {/* Date Badge - Simplified styling */}
                     <div className="absolute top-4 right-4 bg-white px-3 py-1.5 rounded-xl shadow-sm border border-gray-100">

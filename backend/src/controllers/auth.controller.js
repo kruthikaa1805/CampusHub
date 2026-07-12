@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 
 const registerUser = async (req, res) => {
     try {
-        // SECURITY FIX: Removed 'role' from req.body to prevent privilege escalation attacks.
         const { name, email, password } = req.body;
 
         if (!name || !email || !password) {
@@ -22,21 +21,29 @@ const registerUser = async (req, res) => {
         
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // --- SUPERADMIN RBAC LOGIC ---
+        // --- SUPERADMIN RBAC LOGIC (BULLETPROOFED) ---
         let userRole = 'student'; // Everyone defaults to a student
         
-        // Check the secure environment variable list
-        const adminEmails = process.env.SUPERADMIN_EMAILS ? process.env.SUPERADMIN_EMAILS.split(',') : [];
+        // 1. Split the env string, remove all accidental spaces, and make lowercase
+        const adminEmails = process.env.SUPERADMIN_EMAILS 
+            ? process.env.SUPERADMIN_EMAILS.split(',').map(e => e.trim().toLowerCase()) 
+            : [];
 
-        // If their email matches one on the VIP list, grant admin rights
-        if (adminEmails.includes(email)) {
+        // 2. Clean the email coming from the frontend form just in case
+        const safeEmail = email.trim().toLowerCase();
+
+        // 3. Compare the clean strings
+        if (adminEmails.includes(safeEmail)) {
             userRole = 'admin';
+            console.log(`[AUTH SUCCESS] Granted Admin role to: ${safeEmail}`);
+        } else {
+            console.log(`[AUTH] Normal Student registered: ${safeEmail}`);
         }
-        // -----------------------------
+        // ---------------------------------------------
 
         const newUser = await User.create({
             name,
-            email,
+            email, // Save the original email
             password: hashedPassword,
             role: userRole // Assign the dynamically calculated role
         });

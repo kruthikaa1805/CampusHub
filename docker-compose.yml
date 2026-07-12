@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    environment:
+      
+      - PORT=3000
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - SUPERADMIN_EMAILS=${SUPERADMIN_EMAILS}
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
+      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
+    networks:
+      - campus-network
+
+  frontend:
+    build: ./frontend
+    ports:
+     
+      - "5173:80" 
+    depends_on:
+      - backend
+    networks:
+      - campus-network
+
+networks:
+  campus-network:
+    driver: bridge
